@@ -25,10 +25,23 @@ db.connect((err, connection) => {
 });
 
 // data insert into employee table
-app.get('/', (req, res) => {
-    const sqlInsert = "INSERT INTO `employee` (`id`, `first_name`, `last_name`, `email`, `phone`) VALUES (NULL, 'sb', 'sk', 's@bb', '100');";
-    db.query(sqlInsert, (err, result) => {
-        res.send("hello")
+// app.get('/', (req, res) => {
+//     const sqlInsert = "INSERT INTO `employee` (`id`, `first_name`, `last_name`, `email`, `phone`) VALUES (NULL, 'sb', 'sk', 's@bb', '100');";
+//     db.query(sqlInsert, (err, result) => {
+//         res.send("hello")
+//     })
+// })
+
+app.post("/api/insert", (req, res) => {
+
+    const first_name = req.body.firstName
+    const last_name = req.body.lastName
+    const email = req.body.email
+    const phone = req.body.phone
+
+    const sqlInsert = "INSERT INTO `employee` (`id`, `first_name`, `last_name`, `email`, `phone`) VALUES (?, ?, ?, ?, ?);"
+    db.query(sqlInsert, [id, first_name, last_name, email, phone], (err, result) => {
+        console.log(err);
     })
 })
 
